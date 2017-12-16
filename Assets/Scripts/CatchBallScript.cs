@@ -8,6 +8,7 @@ public class CatchBallScript : MonoBehaviour {
     public SpawnBallScript SpawnBallScript;
     public KillBallScript KillBallScript;
     public BallBehaviorScript BallBehaviorScript;
+    public ScoringScript ScoringScript;
 
     public static bool isBallCatchable;
 
@@ -17,6 +18,9 @@ public class CatchBallScript : MonoBehaviour {
     //String to hold the tag of the object being hit by the player tap
     [HideInInspector]
     public string ObjectThatWasHit;
+
+    //UI Panel for End of Round
+    public GameObject EndOfRoundPanel;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +39,17 @@ public class CatchBallScript : MonoBehaviour {
         
 		
 	}
+
+    IEnumerator WaitFunction(float SecondsToWait)
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            isBallCatchable = false;
+        }
+        yield return new WaitForSeconds(SecondsToWait);
+        SpawnBallScript.isBallSpawned = false;
+        isBallCatchable = false;
+    }
 
     public void CatchBall()
     {
@@ -68,16 +83,33 @@ public class CatchBallScript : MonoBehaviour {
                     Debug.Log("Congratulations, you caught it.");
 
                     //Call function from Scoring Script to add score
-                    //ScoringScript.BallCaught(true);
+                    ScoringScript.BallCaught(true);
 
 
                     //Reset ball being spawned after catching
-                    SpawnBallScript.SpawnedBall.SetActive(false);
-                    SpawnBallScript.isBallSpawned = false;
+                    KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);
+
+                    StartCoroutine(WaitFunction(1));
+                    //Fade in Score Text Amount
+                    StartCoroutine(ScoringScript.Fade());
 
 
                 }
+                else
+                {
+                    Debug.Log("You missed the ball.");
+
+                    //Activate UI Panel
+                    EndOfRoundPanel.SetActive(true);
+
+                    //Deactivate spawning of another ball
+                    SpawnBallScript.isBallSpawned = true;
+
+                    //Destroy the ball
+                    KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);
+                }
             }
+            
         }
     }
 

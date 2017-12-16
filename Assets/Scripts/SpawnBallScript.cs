@@ -7,7 +7,7 @@ public class SpawnBallScript : MonoBehaviour {
     //Other Scripts
     public BallBehaviorScript BallBehaviorScript;
     public CatchBallScript CatchBallScript;
-    public KillBallScript KillBallScript;
+    //public KillBallScript KillBallScript;
 
     //Game Object to hold the Player Camera
     public Camera PlayerCamera;
@@ -60,13 +60,14 @@ public class SpawnBallScript : MonoBehaviour {
 	void Start () {
 
         isBallSpawned = false;
+        CatchBallScript.EndOfRoundPanel.SetActive(false);
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        //IF the player taps the screen (or clicks)
+        //IF the player taps the screen (or clicks) to throw a ball
         if (Input.GetMouseButtonDown(0) && CatchBallScript.isBallCatchable == false && isBallSpawned == false)
         {
             SpawnBall();

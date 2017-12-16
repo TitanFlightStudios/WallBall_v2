@@ -20,4 +20,9 @@ public class KillBallScript : MonoBehaviour {
         if (collision.gameObject.tag == "Ball")
             Destroy(collision.gameObject);
     }
+
+    public void DestroyObject(GameObject ObjectToDestroy)
+    {
+        Destroy(ObjectToDestroy);
+    }
 }

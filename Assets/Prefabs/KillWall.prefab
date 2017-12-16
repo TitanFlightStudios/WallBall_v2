@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33309414159692312}
   - component: {fileID: 64646201089891240}
   - component: {fileID: 23187369348722552}
-  - component: {fileID: 114560567530929276}
+  - component: {fileID: 114559961499926758}
   m_Layer: 0
   m_Name: KillWall
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114560567530929276
+--- !u!114 &114559961499926758
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -105,6 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1993222024066774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b701369d5a826024fbd3ae3b1966b396, type: 3}
+  m_Script: {fileID: 11500000, guid: 741cd9e7ef6225e4198b53b9fb174ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
