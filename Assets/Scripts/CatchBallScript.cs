@@ -99,6 +99,19 @@ public class CatchBallScript : MonoBehaviour {
                 {
                     Debug.Log("You missed the ball.");
 
+                    //Fading number each time the ball is caught
+                    ScoringScript.ScoreIncreaseFadeNumberText.text = ScoringScript.fAmountToIncreaseScorePerCatch.ToString();
+
+                    //Current game score shown in the top left
+                    ScoringScript.UICurrentGameScoreText.text = ScoringScript.fCurrentScore.ToString();
+
+                    //Update the final score text
+                    ScoringScript.FinalScoreText.text = ScoringScript.fCurrentScore.ToString();
+
+                    //Update the Ball Speed Multiplier Text
+                    ScoringScript.BallSpeedMultiplierText.text = ScoringScript.ballSpeedMult.ToString();
+
+
                     //Activate UI Panel
                     EndOfRoundPanel.SetActive(true);
 
