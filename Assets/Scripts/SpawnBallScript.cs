@@ -7,7 +7,7 @@ public class SpawnBallScript : MonoBehaviour {
     //Other Scripts
     public BallBehaviorScript BallBehaviorScript;
     public CatchBallScript CatchBallScript;
-    //public KillBallScript KillBallScript;
+    public ScoringScript ScoringScript;
 
     //Game Object to hold the Player Camera
     public Camera PlayerCamera;
@@ -17,6 +17,9 @@ public class SpawnBallScript : MonoBehaviour {
 
     //Speed to move the ball
     public float BallSpeed;
+
+    //Speed that player choses the ball speed to b
+    public float NewBallSpeed;
 
     [HideInInspector]
     //Boolean to use to keep track of a ball being in play
@@ -61,6 +64,7 @@ public class SpawnBallScript : MonoBehaviour {
 
         isBallSpawned = false;
         CatchBallScript.EndOfRoundPanel.SetActive(false);
+        NewBallSpeed = BallSpeed;
 		
 	}
 	
@@ -68,11 +72,17 @@ public class SpawnBallScript : MonoBehaviour {
 	void Update () {
 
         //IF the player taps the screen (or clicks) to throw a ball
-        if (Input.GetMouseButtonDown(0) && CatchBallScript.isBallCatchable == false && isBallSpawned == false)
+        if (Input.GetMouseButtonDown(0) && CatchBallScript.isBallCatchable == false && isBallSpawned == false && ScoringScript.MissedBallPanel.activeSelf == false)
         {
             SpawnBall();
         }
 
+    }
+
+    public void ChangeBallSpeed(float NewBallSpeed)
+    {
+        //Set the Ball speed to the new chosen ball speed
+        BallSpeed = NewBallSpeed;
     }
 
     public void SpawnBall()

@@ -123,7 +123,6 @@ MonoBehaviour:
   PlayerCamera: {fileID: 20715622652734652, guid: abcfeb36d926fc24f9573c17fa848157,
     type: 2}
   ObjectThatWasHit: 
-  BallSpeed: 0
 --- !u!135 &135211126377134640
 SphereCollider:
   m_ObjectHideFlags: 1

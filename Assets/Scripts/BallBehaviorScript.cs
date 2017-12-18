@@ -22,9 +22,6 @@ public class BallBehaviorScript : MonoBehaviour {
     //Variable to hold the string tag of the object being hit by the ball
     public string ObjectThatWasHit;
 
-    //Variable to determine the speed of the ball
-    public float BallSpeed;
-
     // Use this for initialization
     void Start () {
 		

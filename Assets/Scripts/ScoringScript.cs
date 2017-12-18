@@ -107,6 +107,7 @@ public class ScoringScript : MonoBehaviour
         FinalScoreText.text = 0.ToString();
         MissedBallPanel.SetActive(false);
         SpawnBallScript.isBallSpawned = false;
+        CatchBallScript.isBallCatchable = false;
 
     }
 
