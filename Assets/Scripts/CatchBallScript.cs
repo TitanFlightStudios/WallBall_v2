@@ -89,7 +89,7 @@ public class CatchBallScript : MonoBehaviour {
                     //Reset ball being spawned after catching
                     KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);
 
-                    StartCoroutine(WaitFunction(1));
+                    StartCoroutine(WaitFunction(0.25f));
                     //Fade in Score Text Amount
                     StartCoroutine(ScoringScript.Fade());
 

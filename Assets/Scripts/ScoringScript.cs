@@ -48,6 +48,9 @@ public class ScoringScript : MonoBehaviour
         ScoreNumberAmountTxtColor.a = 0;
         PlusButtonForFadeNumberColor.a = 0;
 
+        ScoreNumberAmountTxtComponent.color = ScoreNumberAmountTxtColor;
+        PlusButtonForFadeNumberComponent.color = PlusButtonForFadeNumberColor;
+
         MissedBallPanel.SetActive(false);
 
     }
