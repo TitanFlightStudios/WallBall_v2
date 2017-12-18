@@ -26,12 +26,12 @@ public class SpawnBallScript : MonoBehaviour {
     public bool isBallSpawned;
 
     [HideInInspector]
-    //Temp float to account for dir being less than 0 for X
-    public float XDirection;
+    //Temp float to account for tapCoords being less than 0 for X
+    public float tapCoordsX;
 
     [HideInInspector]
-    //Temp float to account for dir being less than 0 for Y
-    public float YDirection;
+    //Temp float to account for tapCoords being less than 0 for Y
+    public float tapCoordsY;
 
     //Ball's Rigidbody
     public Rigidbody BallRigidbody;
@@ -110,7 +110,7 @@ public class SpawnBallScript : MonoBehaviour {
 
         //Add force at position
         //Add force from where the ball is spawned towards where the player taps
-        Vector3 direction = SpawnedBall.transform.position - TapPosition;
+        Vector3 tapCoordsection = SpawnedBall.transform.position - TapPosition;
 
 
         // Create a ray from the current mouse coordinates var ray: 
@@ -119,46 +119,32 @@ public class SpawnBallScript : MonoBehaviour {
         // if something tagged "Ground" is hit... 
         if (Physics.Raycast(ray, out hit))
         {
-            var dir = hit.point - SpawnedBallPosition;
+            var tapCoords = hit.point - PlayerCamera.ScreenToWorldPoint(TapPosition);
 
-            //Debug.Log("dir: " + dir);
-            //If the player taps in the "problem area" where the direction calculation causes the calculation to go haywire, sending the ball in a reverse direction
+            //Debug.Log("tapCoords: " + tapCoords);
+            //If the player taps in the "problem area" where the tapCoordsection calculation causes the calculation to go haywire, sending the ball in a reverse tapCoordsection
             //COULD USE MORE POLISH HERE; 
             //throwing mechanic is usable as is though
-            if (dir.x < 0 && dir.x > -1 || dir.x > 0 && dir.x < 1 || dir.y < 0 && dir.y > -1 || dir.y > 0 && dir.y < 1)
+            if (tapCoords.x < 0 && tapCoords.x > -1 || tapCoords.x > 0 && tapCoords.x < 1 && tapCoords.y < 0 && tapCoords.y > -1 || tapCoords.y > 0 && tapCoords.y < 1)
             {
-                if (dir.x < 0 && dir.x > -1)
-                {
+                //if (tapCoords.x < 0 && tapCoords.x > -1 || tapCoords.x > 0 && tapCoords.x < 1 && tapCoords.y < 0 && tapCoords.y > -1)
+                //{
                     //Account for x being between 0 and -1 (negative)
 
-                    XDirection = -1;
+                    tapCoordsX = Mathf.RoundToInt(tapCoords.x);
 
-                }
-                if (dir.x > 0 && dir.x < 1)
-                {
-                    //Account for x being between 0 and 1
 
-                    XDirection = 1;
 
-                }
-                if (dir.y < 0 && dir.y > -1)
-                {
-                    //Account for y being between 0 and -1
+                //}
 
-                    YDirection = -1;
-                }
-                if (dir.y > 0 && dir.y < 1)
-                {
-                    //Account for y being between 0 and 1
 
-                    YDirection = 1;
-                }
+                Debug.Log("tapCoords is: " + tapCoords);
 
-                BallRigidbody.AddForce(XDirection, YDirection, BallSpeed, ForceMode.Impulse);
+                BallRigidbody.AddForce(tapCoords.normalized * BallSpeed, ForceMode.Impulse);
             }
             else
             {
-                BallRigidbody.AddForce(dir.normalized * BallSpeed, ForceMode.Impulse);
+                BallRigidbody.AddForce(tapCoords.normalized * BallSpeed, ForceMode.Impulse);
             }
 
 
