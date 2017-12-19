@@ -203,10 +203,10 @@ public class SpawnBallScript : MonoBehaviour {
                 //}
 
 
-                Debug.Log("tapCoords is: " + tapCoords);
+                //Debug.Log("tapCoords is: " + tapCoords);
 
                 BallRigidbody.AddForce(tapCoords.normalized * BallSpeed, ForceMode.Impulse);
-                Debug.Log("Adding force, ball speed is: " + BallSpeed);
+                //Debug.Log("Adding force, ball speed is: " + BallSpeed);
             }
             else
             {

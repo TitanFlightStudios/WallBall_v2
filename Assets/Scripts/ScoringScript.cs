@@ -8,6 +8,8 @@ public class ScoringScript : MonoBehaviour
     public SpawnBallScript SpawnBallScript;
     public BallBehaviorScript BallBehaviorScript;
     public KillBallScript KillBallScript;
+    public CatchBallScript CatchBallScript;
+    public RotateWallScript RotateWallScript;
 
     //Amount to increase the score for every successful catch the player makes in a round
     public float fAmountToIncreaseScorePerCatch;
@@ -38,7 +40,7 @@ public class ScoringScript : MonoBehaviour
     
     [HideInInspector]
     //Variable to hold the amount that the score is multiplied at the end of the round
-    public float ballSpeedMult;
+    public float fballSpeedMult;
 
     //The end of round panel
     public GameObject MissedBallPanel;
@@ -52,7 +54,7 @@ public class ScoringScript : MonoBehaviour
     public Text PlusButtonForFadeNumberText;
     public Text ScoreIncreaseFadeNumberText;
     public Text ScoreNumberAmountText;
-    //Variable to hold the ballSpeedMult text to change depending on the difficulty mult
+    //Variable to hold the fballSpeedMult text to change depending on the difficulty mult
     public Text BallSpeedMultiplierText;
 
     //Text Variable to hold the text that is displayed per catch
@@ -71,13 +73,23 @@ public class ScoringScript : MonoBehaviour
     public GameObject ScoreIncreaseFadeNumberComponent;
 
     //Score to display calculation of score per catches times the multiplier
-    public Text ScoreAfterMultText;
+    public Text FinalScoreAfterMultText;
     //Number  to hold the value for the final score to be calculated
     [HideInInspector]
-    public float fScoreAfterMult;
+    public float fFinalScoreAfterMultNum;
 
-    public Text FinalScoreText;
+    public Text EndOfRoundScoreText;
     public GameObject FinalScoreComponent;
+
+    //Variable to hold the text element to display num of catches
+    public Text NumCatchesText;
+    public Text NumCatchesMultText;
+    //Number to hold the value for the number of catches multiplier value
+    [HideInInspector]
+    public static float fCatchesMult;
+
+    //Text to hold the current multiplier for ball catches in a row
+    public Text fCurrentCatchesMult;
 
     // Use this for initialization
     void Start()
@@ -98,12 +110,60 @@ public class ScoringScript : MonoBehaviour
         ScoreNumberPanelObject.SetActive(false);
         MissedBallPanel.SetActive(false);
 
+        isEasySpeed = true;
+        if (isEasySpeed == true)
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = easySpeedMult;
+        }
+        else if (isMedSpeed == true)
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = medSpeedMult;
+        }
+        else if (isHardSpeed == true)
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = hardSpeedMult;
+        }
+        else
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = easySpeedMult;
+        }
+
+        fCatchesMult = 0.0f;
+        CatchBallScript.CatchesNum = 0.0f;
+
+        CatchBallScript.fSumOfCatchesAndBallSpeedMult = fCatchesMult + fballSpeedMult;
+
+        Debug.Log("fSumofCatches: " + CatchBallScript.fSumOfCatchesAndBallSpeedMult);
+        NumCatchesMultText.text = CatchBallScript.fSumOfCatchesAndBallSpeedMult.ToString();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+
+
+        //Calculation for number of catches
+        fFinalScoreAfterMultNum = fCurrentScore * (fballSpeedMult + fCatchesMult);
+
+        //if (fFinalScoreAfterMultNum < fCurrentScore)
+            //fFinalScoreAfterMultNum = fCurrentScore;
+
+        fCurrentCatchesMult.text = CatchBallScript.fSumOfCatchesAndBallSpeedMult.ToString();
+
+        //Update the final score text
+        EndOfRoundScoreText.text = fCurrentScore.ToString();
+
+        FinalScoreAfterMultText.text = fFinalScoreAfterMultNum.ToString();
 
     }
 
@@ -139,36 +199,20 @@ public class ScoringScript : MonoBehaviour
     public void BallCaught(bool isBallCaught)
     {
 
-        if (isEasySpeed == true)
-        {
-            //Set the Amount to increase score if ball is caught with current speed
-            //Set the ballSpeedMult to the appropriate setting
-            ballSpeedMult = easySpeedMult;
-        }
-        else if (isMedSpeed == true)
-        {
-            //Set the Amount to increase score if ball is caught with current speed
-            //Set the ballSpeedMult to the appropriate setting
-            ballSpeedMult = medSpeedMult;
-        }
-        else if (isHardSpeed == true)
-        {
-            //Set the Amount to increase score if ball is caught with current speed
-            //Set the ballSpeedMult to the appropriate setting
-            ballSpeedMult = hardSpeedMult;
-        }
-        else
-        {
-            //Set the Amount to increase score if ball is caught with current speed
-            //Set the ballSpeedMult to the appropriate setting
-            ballSpeedMult = easySpeedMult;
-        }
-
         //Add the score to the current score
         fCurrentScore += fAmountToIncreaseScorePerCatch;
 
-        fScoreAfterMult = fCurrentScore * ballSpeedMult;
-        ScoreAfterMultText.text = fScoreAfterMult.ToString();
+        //Set number of catches to the fCatchesMult variable
+        fCatchesMult = ((CatchBallScript.CatchesNum) * (CatchBallScript.CatchesNum)) / 100.0f;
+
+        Debug.Log("fCatchesMult: " + fCatchesMult);
+
+        //Multiplier for ball speed
+        //fFinalScoreAfterMultNum = fCurrentScore * fballSpeedMult * fCatchesMult;
+        //FinalScoreAfterMultText.text = fFinalScoreAfterMultNum.ToString();
+
+        //Multiplier for number of catches
+        NumCatchesMultText.text = fCatchesMult.ToString();
 
         //Fading number each time the ball is caught
         ScoreIncreaseFadeNumberText.text = fAmountToIncreaseScorePerCatch.ToString();
@@ -176,13 +220,11 @@ public class ScoringScript : MonoBehaviour
         //Current game score shown in the top left
         UICurrentGameScoreText.text = fCurrentScore.ToString();
 
-        //Update the final score text
-        FinalScoreText.text = fCurrentScore.ToString();
-
         //Update the Ball Speed Multiplier Text
-        BallSpeedMultiplierText.text = ballSpeedMult.ToString();
+        BallSpeedMultiplierText.text = fballSpeedMult.ToString();
 
-        
+        //Update the Number of Catches Text
+        NumCatchesText.text = CatchBallScript.CatchesNum.ToString();
 
 
 
@@ -194,8 +236,11 @@ public class ScoringScript : MonoBehaviour
         //Reset all UI score elements to 0 after the round has been reset
         fCurrentScore = 0;
         UICurrentGameScoreText.text = "0";
-        FinalScoreText.text = "0";
-        ScoreAfterMultText.text = "0";
+        EndOfRoundScoreText.text = "0";
+        FinalScoreAfterMultText.text = "0";
+        NumCatchesMultText.text = "0";
+        CatchBallScript.CatchesNum = 0;
+        fCatchesMult = 0;
 
         //Reset the panel to being deactivated
         MissedBallPanel.SetActive(false);
@@ -203,6 +248,15 @@ public class ScoringScript : MonoBehaviour
         //Reset the ball values to be ready to spawn
         SpawnBallScript.isBallSpawned = false;
         CatchBallScript.isBallCatchable = false;
+
+        //Reset all removed wall pieces
+        for (int i = 0; i < CatchBallScript.WallPieces.Length; i++)
+            CatchBallScript.WallPieces[i].SetActive(true);
+
+        //Stop wall rotation
+
+        RotateWallScript.isWallRotating = false;
+        RotateWallScript.FullWall.transform.eulerAngles = new Vector3 (0,0,0);
 
     }
 

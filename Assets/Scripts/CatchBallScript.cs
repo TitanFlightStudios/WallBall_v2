@@ -9,7 +9,9 @@ public class CatchBallScript : MonoBehaviour {
     public KillBallScript KillBallScript;
     public BallBehaviorScript BallBehaviorScript;
     public ScoringScript ScoringScript;
+    public RotateWallScript RotateWallScript;
 
+    
     public static bool isBallCatchable;
 
     //Player Camera
@@ -22,10 +24,20 @@ public class CatchBallScript : MonoBehaviour {
     //UI Panel for End of Round
     public GameObject EndOfRoundPanel;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    //Array list to hold all wall pieces
+    public GameObject[] WallPieces;
+
+    //Variable to keep track of how many catches have happened this round
+    public static float CatchesNum;
+
+    //Variable to hold the sum of the ball speed multiplier and the ball catches multiplier
+    public float fSumOfCatchesAndBallSpeedMult;
+
+    // Use this for initialization
+    void Start () {
+        CatchesNum = 0.0f;
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -35,10 +47,12 @@ public class CatchBallScript : MonoBehaviour {
             CatchBall();
         }
 
+        fSumOfCatchesAndBallSpeedMult = ScoringScript.fCatchesMult + ScoringScript.fballSpeedMult;
 
-        
-		
-	}
+        ScoringScript.NumCatchesMultText.text = fSumOfCatchesAndBallSpeedMult.ToString();
+
+
+    }
 
     IEnumerator WaitFunction(float SecondsToWait)
     {
@@ -61,15 +75,15 @@ public class CatchBallScript : MonoBehaviour {
         RaycastHit hit;
         //find cursor position at click
         Ray ray = PlayerCamera.ScreenPointToRay(Input.mousePosition);
-        Debug.Log("isBallCatchable: " + isBallCatchable);
+        //Debug.Log("isBallCatchable: " + isBallCatchable);
         //Check to make sure player can only catch ball after it hits wall
         if (isBallCatchable == true)
         {
-            Debug.Log("Entering Raycast function");
+            //Debug.Log("Entering Raycast function");
             //determine if cursor position is overlapping with ball
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("Performing Raycast");
+                //Debug.Log("Performing Raycast");
                 Transform objectHit = hit.transform;
                 //Set the Object's tag that was hit to variable ObjectThatWasHit
                 ObjectThatWasHit = objectHit.tag;
@@ -79,38 +93,55 @@ public class CatchBallScript : MonoBehaviour {
                     //Notify player they caught it - with score
                     //UI things here
 
+                    //Increment the number of successful catches
+                    CatchesNum += 1;
 
-                    Debug.Log("Congratulations, you caught it.");
+                    //Debug.Log("Congratulations, you caught it.");
 
                     //Call function from Scoring Script to add score
                     ScoringScript.BallCaught(true);
 
+                    if (CatchesNum > 5 && CatchesNum < 10 )
+                    {
+                        //Launch RemoveWallPiece Function
+                        RemoveWallPiece();
+                    }
+                    else if (CatchesNum == 11)
+                    {
+                        //Debug.Log("Starting Rotation of wall");
+                        RotateWallScript.isWallRotating = true;
+                        StartCoroutine(RotateWallScript.RotateWall());
+                    }
 
                     //Reset ball being spawned after catching
                     KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);
 
+                    
                     StartCoroutine(WaitFunction(0.25f));
                     //Fade in Score Text Amount
                     StartCoroutine(ScoringScript.Fade());
+
+                    Debug.Log("CatchesNum variable: " + CatchesNum);
+
+                    
 
 
                 }
                 else
                 {
-                    Debug.Log("You missed the ball.");
+                    //Debug.Log("You missed the ball.");
 
                     //Fading number each time the ball is caught
-                    ScoringScript.ScoreIncreaseFadeNumberText.text = ScoringScript.fAmountToIncreaseScorePerCatch.ToString();
+                    //ScoringScript.ScoreIncreaseFadeNumberText.text = ScoringScript.fAmountToIncreaseScorePerCatch.ToString();
 
                     //Current game score shown in the top left
                     ScoringScript.UICurrentGameScoreText.text = ScoringScript.fCurrentScore.ToString();
 
                     //Update the final score text
-                    ScoringScript.FinalScoreText.text = ScoringScript.fCurrentScore.ToString();
+                    //ScoringScript.EndOfRoundScoreText.text = ScoringScript.fCurrentScore.ToString();
 
                     //Update the Ball Speed Multiplier Text
-                    ScoringScript.BallSpeedMultiplierText.text = ScoringScript.ballSpeedMult.ToString();
-
+                    ScoringScript.BallSpeedMultiplierText.text = ScoringScript.fballSpeedMult.ToString();
 
                     //Activate UI Panel
                     EndOfRoundPanel.SetActive(true);
@@ -124,6 +155,25 @@ public class CatchBallScript : MonoBehaviour {
             }
             
         }
+    }
+
+    public void RemoveWallPiece()
+    {
+        //pick a random number between 0 and the list of wall pieces
+        int WallPieceToRemove = Random.Range(0, WallPieces.Length);
+
+        if (WallPieces[WallPieceToRemove] != null)
+        {
+            WallPieces[WallPieceToRemove].SetActive(false);
+        }
+        else
+        {
+            WallPieceToRemove = Random.Range(0, WallPieces.Length);
+            RemoveWallPiece();
+        }
+        //WallPieces.(WallPieceToRemove);
+
+        //Debug.Log("New length of array: " + WallPieces.Length);
     }
 
 
