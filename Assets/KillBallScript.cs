@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class KillBallScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    //Other scripts
+    public SpawnBallScript SpawnBallScript;
+    public BallBehaviorScript BallBehaviorScript;
+    public CatchBallScript CatchBallScript;
+    public ScoringScript ScoringScript;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -15,10 +21,35 @@ public class KillBallScript : MonoBehaviour {
 		
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ball")
-            Destroy(collision.gameObject);
+        {
+            Debug.Log("You missed the ball.");
+
+            //Fading number each time the ball is caught
+            ScoringScript.ScoreIncreaseFadeNumberText.text = ScoringScript.fAmountToIncreaseScorePerCatch.ToString();
+
+            //Current game score shown in the top left
+            ScoringScript.UICurrentGameScoreText.text = ScoringScript.fCurrentScore.ToString();
+
+            //Update the final score text
+            ScoringScript.EndOfRoundScoreText.text = ScoringScript.fCurrentScore.ToString();
+
+            //Update the Ball Speed Multiplier Text
+            ScoringScript.BallSpeedMultiplierText.text = ScoringScript.fballSpeedMult.ToString();
+
+
+            //Activate UI Panel
+            CatchBallScript.EndOfRoundPanel.SetActive(true);
+
+            //Deactivate spawning of another ball
+            SpawnBallScript.isBallSpawned = true;
+
+            //Destroy the ball
+            DestroyObject(SpawnBallScript.SpawnedBall);
+
+        }
     }
 
     public void DestroyObject(GameObject ObjectToDestroy)
