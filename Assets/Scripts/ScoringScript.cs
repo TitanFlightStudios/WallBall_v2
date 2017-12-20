@@ -136,6 +136,9 @@ public class ScoringScript : MonoBehaviour
             fballSpeedMult = easySpeedMult;
         }
 
+        //Update the Ball Speed Multiplier Text
+        BallSpeedMultiplierText.text = fballSpeedMult.ToString();
+
         fCatchesMult = 0.0f;
         CatchBallScript.CatchesNum = 0.0f;
 
@@ -220,9 +223,6 @@ public class ScoringScript : MonoBehaviour
         //Current game score shown in the top left
         UICurrentGameScoreText.text = fCurrentScore.ToString();
 
-        //Update the Ball Speed Multiplier Text
-        BallSpeedMultiplierText.text = fballSpeedMult.ToString();
-
         //Update the Number of Catches Text
         NumCatchesText.text = CatchBallScript.CatchesNum.ToString();
 
@@ -257,6 +257,34 @@ public class ScoringScript : MonoBehaviour
 
         RotateWallScript.isWallRotating = false;
         RotateWallScript.FullWall.transform.eulerAngles = new Vector3 (0,0,0);
+
+        if (isEasySpeed == true)
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = easySpeedMult;
+        }
+        else if (isMedSpeed == true)
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = medSpeedMult;
+        }
+        else if (isHardSpeed == true)
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = hardSpeedMult;
+        }
+        else
+        {
+            //Set the Amount to increase score if ball is caught with current speed
+            //Set the fballSpeedMult to the appropriate setting
+            fballSpeedMult = easySpeedMult;
+        }
+
+        //Update the Ball Speed Multiplier Text
+        BallSpeedMultiplierText.text = fballSpeedMult.ToString();
 
     }
 
