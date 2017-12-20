@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitSideWallRightScript : MonoBehaviour {
+public class HitSideWallLeftScript : MonoBehaviour {
 
     //Other scripts
     public SpawnBallScript SpawnBallScript;
@@ -11,23 +11,26 @@ public class HitSideWallRightScript : MonoBehaviour {
     public ScoringScript ScoringScript;
     public RotateWallScript RotateWallScript;
 
-    public bool didBallHitSideWallRight;
+
+    public bool didBallHitSideWallLeft = false;
 
     // Use this for initialization
     void Start () {
+         didBallHitSideWallLeft = false;
+
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ball")
+        if (collision.gameObject.tag == "Ball")
         {
-            didBallHitSideWallRight = true;
+            didBallHitSideWallLeft = true;
         }
     }
 }

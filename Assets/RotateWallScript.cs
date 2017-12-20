@@ -24,14 +24,15 @@ public class RotateWallScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	}
+
+    }
 
     public IEnumerator RotateWall()
     {
         Debug.Log("Rotating Wall...");
         while (isWallRotating == true)
         {
-            FullWall.transform.Rotate(0, 0, .75f);
+            FullWall.transform.Rotate(0, 0, fRotationSpeed);
             yield return true;
         }
     }

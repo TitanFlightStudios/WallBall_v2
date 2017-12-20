@@ -11,6 +11,7 @@ public class ForceBallTowardCenterScript : MonoBehaviour {
     public ScoringScript ScoringScript;
     public RotateWallScript RotateWallScript;
     public HitSideWallRightScript HitSideWallRightScript;
+    public HitSideWallLeftScript HitSideWallLeftScript;
 
     // Use this for initialization
     void Start () {
@@ -35,10 +36,13 @@ public class ForceBallTowardCenterScript : MonoBehaviour {
                     Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
                 }
             }
-            else
+            else if (HitSideWallLeftScript.didBallHitSideWallLeft == true)
             {
-                //do nothing;
-                Debug.Log("Does nothing");
+                if (collision.gameObject.tag == "Ball")
+                {
+                    collision.rigidbody.AddForce(2, 0, 0, ForceMode.Impulse);
+                    Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
+                }
             }
         }
     }

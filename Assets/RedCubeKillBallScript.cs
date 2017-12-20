@@ -2,32 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitSideWallRightScript : MonoBehaviour {
+public class RedCubeKillBallScript : MonoBehaviour {
 
     //Other scripts
     public SpawnBallScript SpawnBallScript;
-    public BallBehaviorScript BallBehaviorScript;
     public CatchBallScript CatchBallScript;
     public ScoringScript ScoringScript;
-    public RotateWallScript RotateWallScript;
+    public KillBallScript KillBallScript;
 
-    public bool didBallHitSideWallRight;
 
     // Use this for initialization
     void Start () {
-
-    }
+		
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ball")
+        if (collision.gameObject.tag == "Ball")
         {
-            didBallHitSideWallRight = true;
+            Debug.Log("You hit a square");
+
+            //Destroy the ball
+            //DestroyObject(collision.gameObject);
         }
     }
 }

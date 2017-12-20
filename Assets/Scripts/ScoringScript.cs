@@ -11,6 +11,8 @@ public class ScoringScript : MonoBehaviour
     public CatchBallScript CatchBallScript;
     public RotateWallScript RotateWallScript;
     public HitSideWallRightScript HitSideWallRightScript;
+    public HitSideWallLeftScript HitSideWallLeftScript;
+    public SpawnMovingObjectScript SpawnMovingObjectScript;
 
     //Amount to increase the score for every successful catch the player makes in a round
     public float fAmountToIncreaseScorePerCatch;
@@ -27,15 +29,11 @@ public class ScoringScript : MonoBehaviour
     //Easy speed bool
     public bool isEasySpeed = true;
     [HideInInspector]
-    //Medium speed bool
-    public bool isMedSpeed;
-    [HideInInspector]
     //Hard speed bool
     public bool isHardSpeed;
 
     //Values for score per catch depending on speed difficulty
     public float easySpeedMult;
-    public float medSpeedMult;
     public float hardSpeedMult;
 
     
@@ -118,12 +116,6 @@ public class ScoringScript : MonoBehaviour
             //Set the fballSpeedMult to the appropriate setting
             fballSpeedMult = easySpeedMult;
         }
-        else if (isMedSpeed == true)
-        {
-            //Set the Amount to increase score if ball is caught with current speed
-            //Set the fballSpeedMult to the appropriate setting
-            fballSpeedMult = medSpeedMult;
-        }
         else if (isHardSpeed == true)
         {
             //Set the Amount to increase score if ball is caught with current speed
@@ -145,8 +137,8 @@ public class ScoringScript : MonoBehaviour
 
         CatchBallScript.fSumOfCatchesAndBallSpeedMult = fCatchesMult + fballSpeedMult;
 
-        Debug.Log("fSumofCatches: " + CatchBallScript.fSumOfCatchesAndBallSpeedMult);
-        NumCatchesMultText.text = CatchBallScript.fSumOfCatchesAndBallSpeedMult.ToString();
+       //Debug.Log("fSumofCatches: " + CatchBallScript.fSumOfCatchesAndBallSpeedMult);
+        NumCatchesMultText.text = fCatchesMult.ToString();//CatchBallScript.fSumOfCatchesAndBallSpeedMult.ToString();
 
     }
 
@@ -157,7 +149,7 @@ public class ScoringScript : MonoBehaviour
 
 
         //Calculation for number of catches
-        fFinalScoreAfterMultNum = fCurrentScore * (fballSpeedMult + fCatchesMult);
+        fFinalScoreAfterMultNum = Mathf.RoundToInt(fCurrentScore * fballSpeedMult * fCatchesMult);
 
         //if (fFinalScoreAfterMultNum < fCurrentScore)
             //fFinalScoreAfterMultNum = fCurrentScore;
@@ -209,7 +201,7 @@ public class ScoringScript : MonoBehaviour
         //Set number of catches to the fCatchesMult variable
         fCatchesMult = ((CatchBallScript.CatchesNum) * (CatchBallScript.CatchesNum)) / 100.0f;
 
-        Debug.Log("fCatchesMult: " + fCatchesMult);
+        //Debug.Log("fCatchesMult: " + fCatchesMult);
 
         //Multiplier for ball speed
         //fFinalScoreAfterMultNum = fCurrentScore * fballSpeedMult * fCatchesMult;
@@ -245,6 +237,7 @@ public class ScoringScript : MonoBehaviour
 
         //Reset whether ball hit right wall after spawning 
         HitSideWallRightScript.didBallHitSideWallRight = false;
+        HitSideWallLeftScript.didBallHitSideWallLeft = false;
 
         //Reset the panel to being deactivated
         MissedBallPanel.SetActive(false);
@@ -257,6 +250,12 @@ public class ScoringScript : MonoBehaviour
         for (int i = 0; i < CatchBallScript.WallPieces.Length; i++)
             CatchBallScript.WallPieces[i].SetActive(true);
 
+        //Reset Red Cube spawning counter
+        SpawnMovingObjectScript.SpawnCubeCounter = 0;
+
+        //Reset Wall Removal Counter
+        SpawnMovingObjectScript.RemoveWallCounter = 0;
+
         //Stop wall rotation
 
         RotateWallScript.isWallRotating = false;
@@ -267,12 +266,6 @@ public class ScoringScript : MonoBehaviour
             //Set the Amount to increase score if ball is caught with current speed
             //Set the fballSpeedMult to the appropriate setting
             fballSpeedMult = easySpeedMult;
-        }
-        else if (isMedSpeed == true)
-        {
-            //Set the Amount to increase score if ball is caught with current speed
-            //Set the fballSpeedMult to the appropriate setting
-            fballSpeedMult = medSpeedMult;
         }
         else if (isHardSpeed == true)
         {

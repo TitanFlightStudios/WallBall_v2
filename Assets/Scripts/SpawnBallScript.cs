@@ -52,9 +52,6 @@ public class SpawnBallScript : MonoBehaviour {
     //Variable to hold the easyBallSpeed number
     public float easyBallSpeed;
 
-    //Variable to hold the medBallSpeed number
-    public float medBallSpeed;
-
     //Variable to hold the hardBallSpeed number
     public float hardBallSpeed;
 
@@ -75,7 +72,7 @@ public class SpawnBallScript : MonoBehaviour {
 
         isBallSpawned = false;
         CatchBallScript.EndOfRoundPanel.SetActive(false);
-        ScoringScript.isEasySpeed = true;
+        ScoringScript.isHardSpeed = true;
         NewBallSpeed = BallSpeed;
 		
 	}
@@ -95,33 +92,6 @@ public class SpawnBallScript : MonoBehaviour {
     {
         //Set the Ball speed to the new chosen ball speed
         BallSpeed = NewBallSpeed;
-
-        ////Set the variable to determine whether the ball speed is easy, med or hard
-        //if (NewBallSpeed == easyBallSpeed)
-        //{
-        //    ScoringScript.isEasySpeed = true;
-        //    ScoringScript.isMedSpeed = false;
-        //    ScoringScript.isHardSpeed = false;
-        //}
-        //else if (NewBallSpeed == medBallSpeed)
-        //{
-        //    ScoringScript.isEasySpeed = false;
-        //    ScoringScript.isMedSpeed = true;
-        //    ScoringScript.isHardSpeed = false;
-        //}
-        //else if (NewBallSpeed == hardBallSpeed)
-        //{
-        //    ScoringScript.isEasySpeed = false;
-        //    ScoringScript.isMedSpeed = false;
-        //    ScoringScript.isHardSpeed = true;
-        //}
-        //else
-        //{
-        //    ScoringScript.isEasySpeed = true;
-        //    ScoringScript.isMedSpeed = false;
-        //    ScoringScript.isHardSpeed = false;
-        //}
-        //return;
     }
 
     public void SpawnBall()
@@ -136,25 +106,16 @@ public class SpawnBallScript : MonoBehaviour {
         if (BallSpeed == easyBallSpeed)
         {
             ScoringScript.isEasySpeed = true;
-            ScoringScript.isMedSpeed = false;
-            ScoringScript.isHardSpeed = false;
-        }
-        else if (BallSpeed == medBallSpeed)
-        {
-            ScoringScript.isEasySpeed = false;
-            ScoringScript.isMedSpeed = true;
             ScoringScript.isHardSpeed = false;
         }
         else if (BallSpeed == hardBallSpeed)
         {
             ScoringScript.isEasySpeed = false;
-            ScoringScript.isMedSpeed = false;
             ScoringScript.isHardSpeed = true;
         }
         else
         {
             ScoringScript.isEasySpeed = true;
-            ScoringScript.isMedSpeed = false;
             ScoringScript.isHardSpeed = false;
         }
 

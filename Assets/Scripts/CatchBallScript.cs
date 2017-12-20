@@ -11,6 +11,8 @@ public class CatchBallScript : MonoBehaviour {
     public ScoringScript ScoringScript;
     public RotateWallScript RotateWallScript;
     public HitSideWallRightScript HitSideWallRightScript;
+    public HitSideWallLeftScript HitSideWallLeftScript;
+    public SpawnMovingObjectScript SpawnMovingObjectScript;
 
 
     public static bool isBallCatchable;
@@ -50,7 +52,7 @@ public class CatchBallScript : MonoBehaviour {
 
         fSumOfCatchesAndBallSpeedMult = ScoringScript.fCatchesMult + ScoringScript.fballSpeedMult;
 
-        ScoringScript.NumCatchesMultText.text = fSumOfCatchesAndBallSpeedMult.ToString();
+        ScoringScript.NumCatchesMultText.text = ScoringScript.fCatchesMult.ToString();
 
 
     }
@@ -91,44 +93,55 @@ public class CatchBallScript : MonoBehaviour {
                 //If the object that was hit has a tag of "Ball"
                 if (ObjectThatWasHit == "Ball")
                 {
-                    //Notify player they caught it - with score
-                    //UI things here
-
                     //Increment the number of successful catches
                     CatchesNum += 1;
-
-                    //Debug.Log("Congratulations, you caught it.");
 
                     //Call function from Scoring Script to add score
                     ScoringScript.BallCaught(true);
 
-                    if (CatchesNum > 5 && CatchesNum < 10 )
+                    if (CatchesNum == SpawnMovingObjectScript.ArrayOfWhenToRemoveWallPieces[SpawnMovingObjectScript.RemoveWallCounter])
                     {
                         //Launch RemoveWallPiece Function
                         RemoveWallPiece();
                     }
-                    else if (CatchesNum == 11)
+                    if (CatchesNum == 11)
                     {
-                        //Debug.Log("Starting Rotation of wall");
                         RotateWallScript.isWallRotating = true;
                         StartCoroutine(RotateWallScript.RotateWall());
                     }
+                   if (CatchesNum == SpawnMovingObjectScript.ArrayOfWhenToSpawnRedCubes[SpawnMovingObjectScript.SpawnCubeCounter])
+                    {
+                        SpawnMovingObjectScript.RandomSpawnPosition = Random.Range(0, (SpawnMovingObjectScript.ObjectSpawnPositionObjects.Count - 1));
+
+                        SpawnMovingObjectScript.ObjectSpawnPosition = SpawnMovingObjectScript.ObjectSpawnPositionObjects[SpawnMovingObjectScript.RandomSpawnPosition].transform.position;
+                        SpawnMovingObjectScript.SpawnObject(SpawnMovingObjectScript.ObjectSpawnPosition);
+
+                        SpawnMovingObjectScript.ObjectSpawnPositionObjects.RemoveAt(SpawnMovingObjectScript.RandomSpawnPosition);
+                        //Debug.Log("Counter: " + SpawnMovingObjectScript.SpawnCubeCounter);
+
+                        if (SpawnMovingObjectScript.SpawnCubeCounter < (SpawnMovingObjectScript.ArrayOfWhenToSpawnRedCubes.Length - 1))
+                        {
+                            //Debug.Log("Incrementing Counter");
+                            SpawnMovingObjectScript.SpawnCubeCounter += 1;
+                        }
+                    }
+                    else
+                    {
+                        //do  nothing;
+                    }
+                    
 
                     //Reset ball being spawned after catching
                     KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);
 
-                    
+                    //Prevent player from spamming ball spawn
                     StartCoroutine(WaitFunction(0.25f));
+
                     //Fade in Score Text Amount
                     StartCoroutine(ScoringScript.Fade());
 
-                    Debug.Log("CatchesNum variable: " + CatchesNum);
-
                     HitSideWallRightScript.didBallHitSideWallRight = false;
-
-
-
-
+                    HitSideWallLeftScript.didBallHitSideWallLeft = false;
 
                 }
                 else
@@ -155,6 +168,14 @@ public class CatchBallScript : MonoBehaviour {
 
                     //Destroy the ball
                     KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);
+
+                    for (int i = 0; i < SpawnMovingObjectScript.AllRedCubesSpawned.Count; i++)
+                    {
+                        Destroy(SpawnMovingObjectScript.AllRedCubesSpawned[i]);
+                    }
+
+                    //Reset Red Cube spawning counter
+                    SpawnMovingObjectScript.SpawnCubeCounter = 0;
                 }
             }
             
@@ -169,11 +190,19 @@ public class CatchBallScript : MonoBehaviour {
         if (WallPieces[WallPieceToRemove] != null)
         {
             WallPieces[WallPieceToRemove].SetActive(false);
+
+            if (SpawnMovingObjectScript.RemoveWallCounter < (SpawnMovingObjectScript.ArrayOfWhenToRemoveWallPieces.Length - 1))
+            {
+                SpawnMovingObjectScript.RemoveWallCounter += 1;
+            }
         }
         else
         {
+            //Pick a new random wall piece to remove
             WallPieceToRemove = Random.Range(0, WallPieces.Length);
+            //Attempt to remove that wall piece
             RemoveWallPiece();
+
         }
         //WallPieces.(WallPieceToRemove);
 
