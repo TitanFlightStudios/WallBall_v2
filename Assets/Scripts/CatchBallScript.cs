@@ -10,8 +10,9 @@ public class CatchBallScript : MonoBehaviour {
     public BallBehaviorScript BallBehaviorScript;
     public ScoringScript ScoringScript;
     public RotateWallScript RotateWallScript;
+    public HitSideWallRightScript HitSideWallRightScript;
 
-    
+
     public static bool isBallCatchable;
 
     //Player Camera
@@ -123,7 +124,10 @@ public class CatchBallScript : MonoBehaviour {
 
                     Debug.Log("CatchesNum variable: " + CatchesNum);
 
-                    
+                    HitSideWallRightScript.didBallHitSideWallRight = false;
+
+
+
 
 
                 }

@@ -10,6 +10,7 @@ public class ScoringScript : MonoBehaviour
     public KillBallScript KillBallScript;
     public CatchBallScript CatchBallScript;
     public RotateWallScript RotateWallScript;
+    public HitSideWallRightScript HitSideWallRightScript;
 
     //Amount to increase the score for every successful catch the player makes in a round
     public float fAmountToIncreaseScorePerCatch;
@@ -241,6 +242,9 @@ public class ScoringScript : MonoBehaviour
         NumCatchesMultText.text = "0";
         CatchBallScript.CatchesNum = 0;
         fCatchesMult = 0;
+
+        //Reset whether ball hit right wall after spawning 
+        HitSideWallRightScript.didBallHitSideWallRight = false;
 
         //Reset the panel to being deactivated
         MissedBallPanel.SetActive(false);
