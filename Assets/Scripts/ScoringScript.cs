@@ -36,7 +36,7 @@ public class ScoringScript : MonoBehaviour
     public float easySpeedMult;
     public float hardSpeedMult;
 
-    
+
     [HideInInspector]
     //Variable to hold the amount that the score is multiplied at the end of the round
     public float fballSpeedMult;
@@ -137,7 +137,7 @@ public class ScoringScript : MonoBehaviour
 
         CatchBallScript.fSumOfCatchesAndBallSpeedMult = fCatchesMult + fballSpeedMult;
 
-       //Debug.Log("fSumofCatches: " + CatchBallScript.fSumOfCatchesAndBallSpeedMult);
+        //Debug.Log("fSumofCatches: " + CatchBallScript.fSumOfCatchesAndBallSpeedMult);
         NumCatchesMultText.text = fCatchesMult.ToString();//CatchBallScript.fSumOfCatchesAndBallSpeedMult.ToString();
 
     }
@@ -149,10 +149,10 @@ public class ScoringScript : MonoBehaviour
 
 
         //Calculation for number of catches
-        fFinalScoreAfterMultNum = Mathf.RoundToInt(fCurrentScore * fballSpeedMult * fCatchesMult);
+        fFinalScoreAfterMultNum = Mathf.RoundToInt(fCurrentScore * (fballSpeedMult + fCatchesMult));
 
         //if (fFinalScoreAfterMultNum < fCurrentScore)
-            //fFinalScoreAfterMultNum = fCurrentScore;
+        //fFinalScoreAfterMultNum = fCurrentScore;
 
         fCurrentCatchesMult.text = CatchBallScript.fSumOfCatchesAndBallSpeedMult.ToString();
 
@@ -162,6 +162,13 @@ public class ScoringScript : MonoBehaviour
         FinalScoreAfterMultText.text = fFinalScoreAfterMultNum.ToString();
 
     }
+
+    public void IncreaseScoreMultiplier(float AmountToIncreaseMult)
+        {
+        //Increase scoring multiplier here - for hit walls
+        Debug.Log("Ball Hit Wall: " + AmountToIncreaseMult);
+
+        }
 
     public IEnumerator Fade()
     {
