@@ -114,8 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnBallScript: {fileID: 114789849892196250, guid: 5a980e53370753e478d608556ba16d08,
     type: 2}
+  KillBallScript: {fileID: 0}
   CatchBallScript: {fileID: 114535199165670482, guid: 5a980e53370753e478d608556ba16d08,
     type: 2}
+  ScoringScript: {fileID: 0}
+  SpawnMovingObjectScript: {fileID: 0}
   BallRenderer: {fileID: 23997525392321732}
   materials:
   - {fileID: 2100000, guid: 0f056b78722a24243a9b8ec200c5586b, type: 2}

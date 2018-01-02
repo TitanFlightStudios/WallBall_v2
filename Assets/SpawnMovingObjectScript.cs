@@ -6,8 +6,8 @@ public class SpawnMovingObjectScript : MonoBehaviour {
 
     //Other scripts
     public SpawnBallScript SpawnBallScript;
+    public SpawnBallScript CatchBallScript;
     public BallBehaviorScript BallBehaviorScript;
-    public CatchBallScript CatchBallScript;
     public ScoringScript ScoringScript;
 
     //Object used to spawn
@@ -58,6 +58,8 @@ public class SpawnMovingObjectScript : MonoBehaviour {
     [HideInInspector]
     public Rigidbody CurrentlySpawnedObjectRigidbody;
 
+    public GameObject CanvasGameObject;
+
     // Use this for initialization
     void Start () {
 
@@ -84,6 +86,10 @@ public class SpawnMovingObjectScript : MonoBehaviour {
         //Spawn the red cube
         CurrentlySpawnedObject = Object.Instantiate(ObjectToSpawn, SpawnPosition, ObjectToSpawn.transform.localRotation);
         CurrentlySpawnedObjectRigidbody = CurrentlySpawnedObject.GetComponent<Rigidbody>();
+
+        SpawnBallScript SpawnBallScript = GameObject.Find("Main Camera").GetComponent<SpawnBallScript>();
+
+        CatchBallScript CatchBallScript = GameObject.Find("Main Camera").GetComponent<CatchBallScript>();
 
         AllRedCubesSpawned.Add(CurrentlySpawnedObject);
 

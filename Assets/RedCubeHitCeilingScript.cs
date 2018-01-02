@@ -41,7 +41,7 @@ public class RedCubeHitCeilingScript : MonoBehaviour
 
             //Add force to the cube to continue its momentum
             RedCubeRigidbody.AddForce(0, -.25f, 0, ForceMode.Impulse);
-            Debug.Log("Ball hit celiing...adding force...");
+            //Debug.Log("Ball hit celiing...adding force...");
         }
     }
 }

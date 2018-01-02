@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BallBehaviorScript : MonoBehaviour {
 
-    //Other Scripts
+    //Other scripts
     public SpawnBallScript SpawnBallScript;
-
-    //Other Scripts
+    public KillBallScript KillBallScript;
     public CatchBallScript CatchBallScript;
+    public ScoringScript ScoringScript;
+    public SpawnMovingObjectScript SpawnMovingObjectScript;
 
     //Renderer for the ball
     public Renderer BallRenderer;

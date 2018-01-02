@@ -116,7 +116,7 @@ public class CatchBallScript : MonoBehaviour {
                         SpawnMovingObjectScript.ObjectSpawnPosition = SpawnMovingObjectScript.ObjectSpawnPositionObjects[SpawnMovingObjectScript.RandomSpawnPosition].transform.position;
                         SpawnMovingObjectScript.SpawnObject(SpawnMovingObjectScript.ObjectSpawnPosition);
 
-                        SpawnMovingObjectScript.ObjectSpawnPositionObjects.RemoveAt(SpawnMovingObjectScript.RandomSpawnPosition);
+                        //SpawnMovingObjectScript.ObjectSpawnPositionObjects.RemoveAt(SpawnMovingObjectScript.RandomSpawnPosition);
                         //Debug.Log("Counter: " + SpawnMovingObjectScript.SpawnCubeCounter);
 
                         if (SpawnMovingObjectScript.SpawnCubeCounter < (SpawnMovingObjectScript.ArrayOfWhenToSpawnRedCubes.Length - 1))
@@ -181,6 +181,11 @@ public class CatchBallScript : MonoBehaviour {
             
         }
     }
+
+    //public void SetPanelActive()
+    //{
+        //EndOfRoundPanel.SetActive(true);
+    //}
 
     public void RemoveWallPiece()
     {

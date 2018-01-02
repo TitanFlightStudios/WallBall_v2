@@ -166,7 +166,7 @@ public class ScoringScript : MonoBehaviour
     public void IncreaseScoreMultiplier(float AmountToIncreaseMult)
         {
         //Increase scoring multiplier here - for hit walls
-        Debug.Log("Ball Hit Wall: " + AmountToIncreaseMult);
+        //Debug.Log("Ball Hit Wall: " + AmountToIncreaseMult);
 
         }
 

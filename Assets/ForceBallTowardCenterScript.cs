@@ -27,13 +27,13 @@ public class ForceBallTowardCenterScript : MonoBehaviour {
     {
         if (RotateWallScript.isWallRotating == false)
         {
-            Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
+           // Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
             if (HitSideWallRightScript.didBallHitSideWallRight == true)
             {
                 if (collision.gameObject.tag == "Ball")
                 {
                     collision.rigidbody.AddForce(-2, 0, 0, ForceMode.Impulse);
-                    Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
+                    //Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
                 }
             }
             else if (HitSideWallLeftScript.didBallHitSideWallLeft == true)
@@ -41,7 +41,7 @@ public class ForceBallTowardCenterScript : MonoBehaviour {
                 if (collision.gameObject.tag == "Ball")
                 {
                     collision.rigidbody.AddForce(2, 0, 0, ForceMode.Impulse);
-                    Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
+                    //Debug.Log("didBallHitSideWallRight: " + HitSideWallRightScript.didBallHitSideWallRight);
                 }
             }
         }

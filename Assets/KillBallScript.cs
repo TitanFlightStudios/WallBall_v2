@@ -25,7 +25,7 @@ public class KillBallScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ball")
         {
-                Debug.Log("You missed the ball.");
+                //Debug.Log("You missed the ball.");
 
                 //Fading number each time the ball is caught
                 ScoringScript.ScoreIncreaseFadeNumberText.text = ScoringScript.fAmountToIncreaseScorePerCatch.ToString();
@@ -41,7 +41,9 @@ public class KillBallScript : MonoBehaviour {
 
 
                 //Activate UI Panel
-                CatchBallScript.EndOfRoundPanel.SetActive(true);
+                //CatchBallScript.EndOfRoundPanel.SetActive(true);
+
+                ScoringScript.MissedBallPanel.SetActive(true);
 
                 //Deactivate spawning of another ball
                 SpawnBallScript.isBallSpawned = true;
@@ -55,7 +57,7 @@ public class KillBallScript : MonoBehaviour {
     public void DestroyObject(GameObject ObjectToDestroy)
     {
         Destroy(ObjectToDestroy);
-        Debug.Log("You missed the ball.");
+        //Debug.Log("You missed the ball.");
 
     }
 }

@@ -6,15 +6,18 @@ public class RedCubeKillBallScript : MonoBehaviour {
 
     //Other scripts
     public SpawnBallScript SpawnBallScript;
-    public CatchBallScript CatchBallScript;
-    public ScoringScript ScoringScript;
     public KillBallScript KillBallScript;
+    //public CatchBallScript CatchBallScript;
+    public ScoringScript ScoringScript;
+    public SpawnMovingObjectScript SpawnMovingObjectScript;
 
 
     // Use this for initialization
     void Start () {
-		
-	}
+
+        ScoringScript = GameObject.Find("Canvas").GetComponent<ScoringScript>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,10 +28,11 @@ public class RedCubeKillBallScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ball")
         {
-            Debug.Log("You hit a square");
 
-            //Destroy the ball
-            //DestroyObject(collision.gameObject);
+            //Debug.Log("You hit a square!");
+            ScoringScript.MissedBallPanel.SetActive(true);
+            DestroyObject(collision.gameObject);
+
         }
     }
 }
