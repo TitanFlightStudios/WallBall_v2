@@ -11,6 +11,7 @@ public class BallHitFloorScript : MonoBehaviour
     public CatchBallScript CatchBallScript;
     public ScoringScript ScoringScript;
     public RotateWallScript RotateWallScript;
+    public RedCubeKillBallScript RedCubeKillBallScript;
 
     // Use this for initialization
     void Start()
@@ -39,9 +40,16 @@ public class BallHitFloorScript : MonoBehaviour
         {
             RedCubeRigidbody = collision.gameObject.GetComponent<Rigidbody>();
 
-            //Add force to the cube to continue its momentum
-            RedCubeRigidbody.AddForce(0, .25f, 0, ForceMode.Impulse);
-            //Debug.Log("Ball hit floor...adding force...");
+            if (RedCubeRigidbody.velocity.y < RedCubeKillBallScript.fCubeMaxSpeed)
+            {
+                //Add force to the cube to continue its momentum
+                RedCubeRigidbody.AddForce(0, 0.5f, 0, ForceMode.Impulse);
+            }
+            else
+            {
+                //if the cube is going over the set max speed, then set the velocity of the cube to the max speed while keeping other values as they were
+                RedCubeRigidbody.velocity = new Vector3(RedCubeRigidbody.velocity.x, RedCubeKillBallScript.fCubeMaxSpeed);
+            }
         }
     }
 }

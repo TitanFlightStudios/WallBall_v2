@@ -11,6 +11,9 @@ public class RedCubeKillBallScript : MonoBehaviour {
     public ScoringScript ScoringScript;
     public SpawnMovingObjectScript SpawnMovingObjectScript;
 
+    //Use this for setting the max speed the cubes can go at
+    public float fCubeMaxSpeed;
+
 
     // Use this for initialization
     void Start () {

@@ -10,6 +10,7 @@ public class HitSideWallRightScript : MonoBehaviour {
     public CatchBallScript CatchBallScript;
     public ScoringScript ScoringScript;
     public RotateWallScript RotateWallScript;
+    public RedCubeKillBallScript RedCubeKillBallScript;
 
     public bool didBallHitSideWallRight;
 
@@ -39,12 +40,20 @@ public class HitSideWallRightScript : MonoBehaviour {
             ScoringScript.IncreaseScoreMultiplier(0.25f);
         }
 
-        if(collision.gameObject.tag == "RedCube")
+        if (collision.gameObject.tag == "RedCube")
         {
             RedCubeRigidbody = collision.gameObject.GetComponent<Rigidbody>();
 
-            //Add force to the cube to continue its momentum
-            RedCubeRigidbody.AddForce(-.25f, 0, 0, ForceMode.Impulse);
+            if (RedCubeRigidbody.velocity.x < RedCubeKillBallScript.fCubeMaxSpeed)
+            {
+                //Add force to the cube to continue its momentum
+                RedCubeRigidbody.AddForce(-0.5f, 0, 0, ForceMode.Impulse);
+            }
+            else
+            {
+                //if the cube is going over the set max speed, then set the velocity of the cube to the max speed while keeping other values as they were
+                RedCubeRigidbody.velocity = new Vector3(RedCubeKillBallScript.fCubeMaxSpeed, RedCubeRigidbody.velocity.y);
+            }
         }
     }
 }

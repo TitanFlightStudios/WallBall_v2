@@ -166,6 +166,7 @@ public class ScoringScript : MonoBehaviour
     public void IncreaseScoreMultiplier(float AmountToIncreaseMult)
         {
         //Increase scoring multiplier here - for hit walls
+        fCatchesMult += AmountToIncreaseMult;
         //Debug.Log("Ball Hit Wall: " + AmountToIncreaseMult);
 
         }
@@ -206,7 +207,7 @@ public class ScoringScript : MonoBehaviour
         fCurrentScore += fAmountToIncreaseScorePerCatch;
 
         //Set number of catches to the fCatchesMult variable
-        fCatchesMult = ((CatchBallScript.CatchesNum) * (CatchBallScript.CatchesNum)) / 100.0f;
+        IncreaseScoreMultiplier(0.25f);
 
         //Debug.Log("fCatchesMult: " + fCatchesMult);
 
