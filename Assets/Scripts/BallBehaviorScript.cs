@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BallBehaviorScript : MonoBehaviour {
 
-    //Other Scripts
+    //Other scripts
     public SpawnBallScript SpawnBallScript;
-
-    //Other Scripts
+    public KillBallScript KillBallScript;
     public CatchBallScript CatchBallScript;
+    public ScoringScript ScoringScript;
+    public SpawnMovingObjectScript SpawnMovingObjectScript;
 
     //Renderer for the ball
     public Renderer BallRenderer;
@@ -40,7 +41,7 @@ public class BallBehaviorScript : MonoBehaviour {
             CatchBallScript.isBallCatchable = true;
             //Debug.Log("Set ball as catchable" + CatchBallScript.isBallCatchable);
 
-            SpawnBallScript.BallRigidbody.AddForce(-45, 0, 0, ForceMode.Impulse);
+            SpawnBallScript.BallRigidbody.AddForce(-45, 0, 0, ForceMode.Impulse); 
 
             //Change the material of the ball to make it visual that the ball is catchable
             BallRenderer.sharedMaterial = materials[1];
