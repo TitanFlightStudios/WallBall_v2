@@ -13,6 +13,7 @@ public class ScoringScript : MonoBehaviour
     public HitSideWallRightScript HitSideWallRightScript;
     public HitSideWallLeftScript HitSideWallLeftScript;
     public SpawnMovingObjectScript SpawnMovingObjectScript;
+    public AssignBlockColorScript AssignBlockColorScript;
 
     //Amount to increase the score for every successful catch the player makes in a round
     public float fAmountToIncreaseScorePerCatch;
@@ -139,6 +140,8 @@ public class ScoringScript : MonoBehaviour
 
         //Debug.Log("fSumofCatches: " + CatchBallScript.fSumOfCatchesAndBallSpeedMult);
         NumCatchesMultText.text = fCatchesMult.ToString();//CatchBallScript.fSumOfCatchesAndBallSpeedMult.ToString();
+
+
 
     }
 
@@ -290,6 +293,21 @@ public class ScoringScript : MonoBehaviour
 
         //Update the Ball Speed Multiplier Text
         BallSpeedMultiplierText.text = fballSpeedMult.ToString();
+
+        //Reset the block colors
+        StartCoroutine(AssignBlockColorScript.AssignColorsToBlocksFunction());
+
+        for (int i = 0; i < SpawnMovingObjectScript.AllRedCubesSpawned.Count; i++)
+        {
+            Destroy(SpawnMovingObjectScript.AllRedCubesSpawned[i]);
+            Debug.Log("Destorying Cube");
+        }
+
+        //Clear the redcubearray
+        SpawnMovingObjectScript.AllRedCubesSpawned.Clear();
+        Debug.Log("Length Of Red Cube Array: " + SpawnMovingObjectScript.AllRedCubesSpawned.Count);
+
+
 
     }
 

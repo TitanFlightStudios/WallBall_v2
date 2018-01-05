@@ -169,10 +169,7 @@ public class CatchBallScript : MonoBehaviour {
                     //Destroy the ball
                     KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);
 
-                    for (int i = 0; i < SpawnMovingObjectScript.AllRedCubesSpawned.Count; i++)
-                    {
-                        Destroy(SpawnMovingObjectScript.AllRedCubesSpawned[i]);
-                    }
+
 
                     //Reset Red Cube spawning counter
                     SpawnMovingObjectScript.SpawnCubeCounter = 0;
