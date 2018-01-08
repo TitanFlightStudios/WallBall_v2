@@ -34,12 +34,22 @@ public class CatchBallScript : MonoBehaviour {
     public static float CatchesNum;
 
     //Variable to hold the sum of the ball speed multiplier and the ball catches multiplier
-    public float fSumOfCatchesAndBallSpeedMult;
+    public float fSumOfCatchesAndWallHitMult;
+
+        //Variable to track whether the ball was caught - used to determine how much multiplier to add with walls and catches
+    public bool bBallWasCaught;
+
+    //Point Light for main level
+    public GameObject MainRoomLight;
+
+    public Light MainRoomLightSettings;
 
     // Use this for initialization
     void Start () {
         CatchesNum = 0.0f;
-        
+
+        MainRoomLightSettings = MainRoomLight.GetComponent<Light>();
+
     }
 	
 	// Update is called once per frame
@@ -50,7 +60,7 @@ public class CatchBallScript : MonoBehaviour {
             CatchBall();
         }
 
-        fSumOfCatchesAndBallSpeedMult = ScoringScript.fCatchesMult + ScoringScript.fballSpeedMult;
+        //fSumOfCatchesAndWallHitMult = ScoringScript.fCatchesMult + ScoringScript.fballSpeedMult;
 
         ScoringScript.NumCatchesMultText.text = ScoringScript.fCatchesMult.ToString();
 
@@ -103,11 +113,15 @@ public class CatchBallScript : MonoBehaviour {
                     {
                         //Launch RemoveWallPiece Function
                         RemoveWallPiece();
+
+                        MainRoomLightSettings.color = Color.blue;
                     }
                     if (CatchesNum == 11)
                     {
                         RotateWallScript.isWallRotating = true;
                         StartCoroutine(RotateWallScript.RotateWall());
+
+                        MainRoomLightSettings.color = Color.red;
                     }
                    if (CatchesNum == SpawnMovingObjectScript.ArrayOfWhenToSpawnRedCubes[SpawnMovingObjectScript.SpawnCubeCounter])
                     {
@@ -115,6 +129,8 @@ public class CatchBallScript : MonoBehaviour {
 
                         SpawnMovingObjectScript.ObjectSpawnPosition = SpawnMovingObjectScript.ObjectSpawnPositionObjects[SpawnMovingObjectScript.RandomSpawnPosition].transform.position;
                         SpawnMovingObjectScript.SpawnObject(SpawnMovingObjectScript.ObjectSpawnPosition);
+
+                        MainRoomLightSettings.color = Color.yellow;
 
                         //SpawnMovingObjectScript.ObjectSpawnPositionObjects.RemoveAt(SpawnMovingObjectScript.RandomSpawnPosition);
                         //Debug.Log("Counter: " + SpawnMovingObjectScript.SpawnCubeCounter);
@@ -143,6 +159,8 @@ public class CatchBallScript : MonoBehaviour {
                     HitSideWallRightScript.didBallHitSideWallRight = false;
                     HitSideWallLeftScript.didBallHitSideWallLeft = false;
 
+                    bBallWasCaught = false;
+
                 }
                 else
                 {
@@ -158,13 +176,15 @@ public class CatchBallScript : MonoBehaviour {
                     //ScoringScript.EndOfRoundScoreText.text = ScoringScript.fCurrentScore.ToString();
 
                     //Update the Ball Speed Multiplier Text
-                    ScoringScript.BallSpeedMultiplierText.text = ScoringScript.fballSpeedMult.ToString();
+                    //ScoringScript.BallSpeedMultiplierText.text = ScoringScript.fballSpeedMult.ToString();
 
                     //Activate UI Panel
                     EndOfRoundPanel.SetActive(true);
 
                     //Deactivate spawning of another ball
                     SpawnBallScript.isBallSpawned = true;
+
+                    bBallWasCaught = true;
 
                     //Destroy the ball
                     KillBallScript.DestroyObject(SpawnBallScript.SpawnedBall);

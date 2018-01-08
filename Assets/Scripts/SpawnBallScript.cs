@@ -50,14 +50,14 @@ public class SpawnBallScript : MonoBehaviour {
     public Vector3 TapPosition;
 
     //Variable to hold the easyBallSpeed number
-    public float easyBallSpeed;
+    //public float easyBallSpeed;
 
     //Variable to hold the hardBallSpeed number
     public float hardBallSpeed;
 
     //Speed to move the ball
     [HideInInspector]
-    public static float BallSpeed = 15;
+    public static float BallSpeed;
 
     //Speed that player choses the ball speed to be
     [HideInInspector]
@@ -72,10 +72,12 @@ public class SpawnBallScript : MonoBehaviour {
 
         isBallSpawned = false;
         CatchBallScript.EndOfRoundPanel.SetActive(false);
-        ScoringScript.isHardSpeed = true;
-        NewBallSpeed = BallSpeed;
-		
-	}
+        //ScoringScript.isHardSpeed = true;
+        //NewBallSpeed = BallSpeed;
+
+        BallSpeed = hardBallSpeed;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -91,7 +93,7 @@ public class SpawnBallScript : MonoBehaviour {
     public void ChangeBallSpeed(float NewBallSpeed)
     {
         //Set the Ball speed to the new chosen ball speed
-        BallSpeed = NewBallSpeed;
+        //BallSpeed = hardBallSpeed;
     }
 
     public void SpawnBall()
@@ -103,21 +105,21 @@ public class SpawnBallScript : MonoBehaviour {
         SpawnedBallPosition = PlayerCamera.ScreenToWorldPoint(TapPosition) + new Vector3(0, 0, 5);
 
         //Set the variable to determine whether the ball speed is easy, med or hard
-        if (BallSpeed == easyBallSpeed)
-        {
-            ScoringScript.isEasySpeed = true;
-            ScoringScript.isHardSpeed = false;
-        }
-        else if (BallSpeed == hardBallSpeed)
-        {
-            ScoringScript.isEasySpeed = false;
-            ScoringScript.isHardSpeed = true;
-        }
-        else
-        {
-            ScoringScript.isEasySpeed = true;
-            ScoringScript.isHardSpeed = false;
-        }
+        //if (BallSpeed == easyBallSpeed)
+        //{
+        //    ScoringScript.isEasySpeed = true;
+        //    ScoringScript.isHardSpeed = false;
+        //}
+        //else if (BallSpeed == hardBallSpeed)
+        //{
+        //    ScoringScript.isEasySpeed = false;
+        //    ScoringScript.isHardSpeed = true;
+        //}
+        //else
+        //{
+        //    ScoringScript.isEasySpeed = true;
+        //    ScoringScript.isHardSpeed = false;
+        //}
 
         //Set the SpawnedBall Game Object to the new ball being spawned into the scene using the tap position acquired earlier that was set to world coords
         SpawnedBall = Object.Instantiate(Ball, SpawnedBallPosition, Ball.transform.localRotation);
