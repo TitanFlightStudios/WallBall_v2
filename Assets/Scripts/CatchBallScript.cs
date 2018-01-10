@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChartboostSDK;
+
+
 
 public class CatchBallScript : MonoBehaviour {
 
@@ -13,6 +16,8 @@ public class CatchBallScript : MonoBehaviour {
     public HitSideWallRightScript HitSideWallRightScript;
     public HitSideWallLeftScript HitSideWallLeftScript;
     public SpawnMovingObjectScript SpawnMovingObjectScript;
+
+
 
 
     public static bool isBallCatchable;
@@ -193,6 +198,13 @@ public class CatchBallScript : MonoBehaviour {
 
                     //Reset Red Cube spawning counter
                     SpawnMovingObjectScript.SpawnCubeCounter = 0;
+
+
+
+                    // Show interstitial at location HomeScreen. 
+                    // See Chartboost.cs for available location options.
+                    Chartboost.showInterstitial(CBLocation.Default);
+                    Debug.Log("Showing Interstitial");
                 }
             }
             
