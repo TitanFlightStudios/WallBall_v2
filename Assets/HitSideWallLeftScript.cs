@@ -35,9 +35,13 @@ public class HitSideWallLeftScript : MonoBehaviour {
         if (collision.gameObject.tag == "Ball")
         {
             didBallHitSideWallLeft = true;
+                //Increase score multiplier
+                ScoringScript.IncreaseScoreMultiplier(0.25f);
 
-            //Increase score multiplier
-            ScoringScript.IncreaseScoreMultiplier(0.25f);
+                //Note hit for WallsHitNum
+                ScoringScript.WallsHitNum += 0.25f;
+
+            CatchBallScript.fSumOfCatchesAndWallHitMult += 0.25f;
         }
 
         if (collision.gameObject.tag == "RedCube")

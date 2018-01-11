@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/WallBall_v2_MainMenu.unity
+    guid: b4e007cb5b10a774f98173d3a64fd917
+  - enabled: 1
     path: Assets/Scenes/WallBall_v2_FirstLevel.unity
     guid: 6794bf851bdf95046b06231ab8f5a3cd

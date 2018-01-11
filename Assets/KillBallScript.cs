@@ -37,7 +37,7 @@ public class KillBallScript : MonoBehaviour {
                 ScoringScript.EndOfRoundScoreText.text = ScoringScript.fCurrentScore.ToString();
 
                 //Update the Ball Speed Multiplier Text
-                ScoringScript.BallSpeedMultiplierText.text = ScoringScript.fballSpeedMult.ToString();
+                //ScoringScript.BallSpeedMultiplierText.text = ScoringScript.fballSpeedMult.ToString();
 
 
                 //Activate UI Panel

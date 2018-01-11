@@ -98,19 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnBallScript: {fileID: 114789849892196250}
-  KillBallScript: {fileID: 114020600458270062, guid: feecc20eab2b88f4e91ec362eb40d09f,
-    type: 2}
+  KillBallScript: {fileID: 0}
   BallBehaviorScript: {fileID: 114297401853828798, guid: 469000a7db2438d47aa2f8d09a78553c,
     type: 2}
-  ScoringScript: {fileID: 114255164571796078, guid: 102ae3f6dd385fe42959d763f7f812c2,
-    type: 2}
-  RotateWallScript: {fileID: 114964021307181134, guid: be8a110c05bcd5e428de12ffc9e3be18,
-    type: 2}
-  HitSideWallRightScript: {fileID: 114749988976181596, guid: edc4b70da726d5c4c9ae6072cc674053,
-    type: 2}
+  ScoringScript: {fileID: 0}
+  RotateWallScript: {fileID: 0}
+  HitSideWallRightScript: {fileID: 0}
   HitSideWallLeftScript: {fileID: 0}
-  SpawnMovingObjectScript: {fileID: 114020703376917282, guid: b2681d0f5e995be49ba0b4a1472cd89b,
-    type: 2}
+  SpawnMovingObjectScript: {fileID: 0}
   PlayerCamera: {fileID: 20679132376243964}
   ObjectThatWasHit: 
   EndOfRoundPanel: {fileID: 0}
@@ -143,7 +138,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  fSumOfCatchesAndBallSpeedMult: 1
+  fSumOfCatchesAndWallHitMult: 0
+  bBallWasCaught: 0
+  MainRoomLight: {fileID: 0}
+  MainRoomLightSettings: {fileID: 0}
 --- !u!114 &114789849892196250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,11 +156,10 @@ MonoBehaviour:
   BallBehaviorScript: {fileID: 114297401853828798, guid: 469000a7db2438d47aa2f8d09a78553c,
     type: 2}
   CatchBallScript: {fileID: 114535199165670482}
-  ScoringScript: {fileID: 114255164571796078, guid: 102ae3f6dd385fe42959d763f7f812c2,
-    type: 2}
+  ScoringScript: {fileID: 0}
   PlayerCamera: {fileID: 20679132376243964}
   Ball: {fileID: 1610745812201434, guid: 469000a7db2438d47aa2f8d09a78553c, type: 2}
-  BallRigidbody: {fileID: 54222877035165480, guid: 469000a7db2438d47aa2f8d09a78553c,
+  BallRigidbody: {fileID: 54317658354110286, guid: 469000a7db2438d47aa2f8d09a78553c,
     type: 2}
   isBallSpawned: 1
   tapCoordsX: 0
@@ -171,7 +168,6 @@ MonoBehaviour:
   SpawnedBall: {fileID: 0}
   SpawnedBallPosition: {x: 0, y: 0, z: 0}
   TapPosition: {x: 0, y: 0, z: 0}
-  easyBallSpeed: 20
   hardBallSpeed: 30
   NewBallSpeed: 0
 --- !u!124 &124093064738467660

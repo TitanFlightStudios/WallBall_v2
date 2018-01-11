@@ -32,8 +32,11 @@ public class RedCubeHitCeilingScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Ball")
         {
-            //Increase score multiplier
-            ScoringScript.IncreaseScoreMultiplier(0.25f);
+            if (CatchBallScript.bBallWasCaught == true)
+            {
+                //Increase score multiplier
+                ScoringScript.IncreaseScoreMultiplier(0.25f);
+            }
         }
 
         if (collision.gameObject.tag == "RedCube")

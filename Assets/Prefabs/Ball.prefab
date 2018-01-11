@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33199007111965306}
   - component: {fileID: 135909106965643016}
   - component: {fileID: 23997525392321732}
-  - component: {fileID: 54222877035165480}
   - component: {fileID: 135737829051229348}
+  - component: {fileID: 54317658354110286}
   - component: {fileID: 114297401853828798}
   m_Layer: 0
   m_Name: Ball
@@ -59,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0f056b78722a24243a9b8ec200c5586b, type: 2}
+  - {fileID: 2100000, guid: b94ac19497e49c140863caad920eee21, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -86,7 +86,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1610745812201434}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54222877035165480
+--- !u!54 &54317658354110286
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -121,8 +121,19 @@ MonoBehaviour:
   SpawnMovingObjectScript: {fileID: 0}
   BallRenderer: {fileID: 23997525392321732}
   materials:
+<<<<<<< HEAD
   - {fileID: 2100000, guid: 0f056b78722a24243a9b8ec200c5586b, type: 2}
   - {fileID: 2100000, guid: 71cb21f914f010e4ab279d64857d1e4c, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+=======
+  - {fileID: 2100000, guid: b94ac19497e49c140863caad920eee21, type: 2}
+  - {fileID: 2100000, guid: 5f6a03480f6d0484483f01c58801b41d, type: 2}
+  - {fileID: 2100000, guid: 548fee03d71d90547b53c3eb4f4a7f18, type: 2}
+  - {fileID: 2100000, guid: 5d06aa0e6c8c1bc4bac3165fe06c66e2, type: 2}
+  - {fileID: 2100000, guid: fd5be9f5934eb8649961fb49a875c05c, type: 2}
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
   PlayerCamera: {fileID: 20679132376243964, guid: 5a980e53370753e478d608556ba16d08,
     type: 2}
   ObjectThatWasHit: 
@@ -136,7 +147,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.25
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135909106965643016
 SphereCollider:
