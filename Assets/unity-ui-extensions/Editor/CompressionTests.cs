@@ -29,6 +29,10 @@ public class CompressionTests  {
 
         Assert.AreEqual(byteText.Length, decompressed.Length);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
     }
 
     [Test]

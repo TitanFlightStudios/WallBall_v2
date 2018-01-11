@@ -1184,7 +1184,11 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+<<<<<<< HEAD
           m_IntArgument: 1
+=======
+          m_IntArgument: 0
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3243,7 +3247,10 @@ GameObject:
   - component: {fileID: 1535024433}
   - component: {fileID: 1535024432}
   - component: {fileID: 1535024436}
+<<<<<<< HEAD
   - component: {fileID: 1535024437}
+=======
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3316,7 +3323,11 @@ RectTransform:
   m_GameObject: {fileID: 1535024431}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 1}
+<<<<<<< HEAD
   m_LocalScale: {x: 0.014431069, y: 0.014431069, z: 0.014431069}
+=======
+  m_LocalScale: {x: 0.015371439, y: 0.015371439, z: 0.015371439}
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
   m_Children:
   - {fileID: 1174110521}
   - {fileID: 71338343}
@@ -3342,6 +3353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BallBehaviorScript: {fileID: 114297401853828798, guid: 469000a7db2438d47aa2f8d09a78553c,
     type: 2}
+<<<<<<< HEAD
 --- !u!114 &1535024437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3353,6 +3365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4867ca3737116ee44b95240e6135dfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
 --- !u!1 &1542374903
 GameObject:
   m_ObjectHideFlags: 0

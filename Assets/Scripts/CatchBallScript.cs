@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChartboostSDK;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
 
 public class CatchBallScript : MonoBehaviour {
 
@@ -205,7 +209,12 @@ public class CatchBallScript : MonoBehaviour {
 
                     // Show interstitial at location HomeScreen. 
                     // See Chartboost.cs for available location options.
+<<<<<<< HEAD
                     Chartboost.showInterstitial(CBLocation.HomeScreen);
+=======
+                    Chartboost.showInterstitial(CBLocation.Default);
+                    Debug.Log("Showing Interstitial");
+>>>>>>> 2b60f502a8947a201f9750c4d3c90cd68db472d5
                 }
             }
             
